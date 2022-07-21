@@ -1,0 +1,7 @@
+{
+  "name": "Arpeaga",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
