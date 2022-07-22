@@ -2,36 +2,17 @@
 
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonGrid, IonRow } from "@ionic/react"
 import React from "react"
+import { convertToHhMmSs } from '../util/timeDisplay'
 
 interface StatsProps {
   sessionTime?: number,
-  currentRunTime?: number
+  currentRunTime?: number,
+  runCount?: number,
+  totalRuns?: number
 }
 
-const StatsCard: React.FC<StatsProps> = ({ sessionTime, currentRunTime }) => {
-  
-  const convertToHhMmSs = (s: number): string => {
-    let seconds = s
-    const hours = Math.trunc(seconds / 3600)
-    seconds = seconds % 3600
-    const minutes = Math.trunc(seconds / 60)
-    seconds = seconds % 60
-    
-    return hours.toLocaleString('en-US', {
-      minimumIntegerDigits: 2,
-      useGrouping: false
-    }) 
-    + ":" 
-    + minutes.toLocaleString('en-US', {
-        minimumIntegerDigits: 2,
-        useGrouping: false
-      }) 
-    + ":" 
-    + seconds.toLocaleString('en-US', {
-        minimumIntegerDigits: 2,
-        useGrouping: false
-      })
-  }
+const StatsCard: React.FC<StatsProps> = 
+  ({ sessionTime, currentRunTime, runCount, totalRuns }) => {
 
   let formattedSessionTime: string = convertToHhMmSs(sessionTime as number)
   let formattedCurrentRunTime: string = convertToHhMmSs(currentRunTime as number)
@@ -56,11 +37,11 @@ const StatsCard: React.FC<StatsProps> = ({ sessionTime, currentRunTime }) => {
             <IonRow>
               <IonCol>
                 <IonCardSubtitle>Run Count</IonCardSubtitle>
-                <IonCardTitle>33</IonCardTitle>
+                <IonCardTitle data-testid="runCount">{ runCount }</IonCardTitle>
               </IonCol>
               <IonCol>
                 <IonCardSubtitle>Total Runs</IonCardSubtitle>
-                <IonCardTitle>1337</IonCardTitle>
+                <IonCardTitle data-testid="totalRuns">{ totalRuns }</IonCardTitle>
               </IonCol>
             </IonRow>
           </IonGrid>
